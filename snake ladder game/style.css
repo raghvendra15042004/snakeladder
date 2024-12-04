@@ -1,0 +1,96 @@
+body 
+{
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, rgb(149, 0, 255), #9fdffc,rgb(0, 122, 128));
+}
+
+.container 
+{
+    text-align: center;
+}
+
+h1 
+{
+    font-size: 2.5rem;
+    color: rgb(255, 0, 43);
+}
+
+.board 
+{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 2px;
+    width: 500px;
+    height: 470px;
+    background-size: cover;
+    border: 5px solid rgb(208, 255, 192);
+    margin: 20px auto;
+    position: relative;
+}
+
+.cell 
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #ffffff;
+    position: relative;
+    background-color: red;
+}
+
+
+.player {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    transition: top 0.3s, left 0.3s;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
+}
+
+.player1 {
+    background-color: yellow;
+}
+
+.player2 {
+    background-color: blue;
+}
+
+.info {
+    margin-top: 20px;
+}
+
+#rollBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#rollBtn:hover {
+    transform: scale(1.1);
+}
+
+#diceRoll {
+    font-size: 24px;
+    margin-top: 10px;
+}
