@@ -1,41 +1,41 @@
-body 
-{
+body {
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(to right, rgb(149, 0, 255), #9fdffc,rgb(0, 122, 128));
+    background: linear-gradient(to right, rgb(149, 0, 255), #9fdffc, rgb(0, 122, 128));
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.container 
-{
+.container {
     text-align: center;
 }
 
-h1 
-{
-    font-size: 2.5rem;
+h1 {
+    font-size: 2rem;
     color: rgb(255, 0, 43);
+    margin-bottom: 20px;
 }
 
-.board 
-{
+.board {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     gap: 2px;
-    width: 500px;
-    height: 470px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 1;
     background-size: cover;
     border: 5px solid rgb(208, 255, 192);
     margin: 20px auto;
     position: relative;
 }
 
-.cell 
-{
+.cell {
     width: 100%;
     height: 100%;
     display: flex;
@@ -48,10 +48,7 @@ h1
     background-color: red;
 }
 
-
 .player {
-    width: 35px;
-    height: 35px;
     border-radius: 50%;
     position: absolute;
     transition: top 0.3s, left 0.3s;
@@ -60,6 +57,8 @@ h1
     justify-content: center;
     display: flex;
     padding: 5px;
+    width: calc(100% / 10 * 0.8);
+    height: calc(100% / 10 * 0.8);
 }
 
 .player1 {
@@ -93,4 +92,28 @@ h1
 #diceRoll {
     font-size: 24px;
     margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .board {
+        max-width: 300px;
+        gap: 1px;
+    }
+
+    .cell {
+        font-size: 0.6rem;
+    }
+
+    #rollBtn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    #diceRoll {
+        font-size: 20px;
+    }
 }

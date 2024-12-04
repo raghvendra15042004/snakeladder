@@ -17,16 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     players[0].element = createPlayerElement('player1');
     players[1].element = createPlayerElement('player2');
     updateStatus();
+    updateAllPlayerSizes();
+    window.addEventListener('resize', () => {
+        updateAllPlayerPositions();
+        updateAllPlayerSizes();
+    });
 });
 
 rollBtn.addEventListener('click', () => {
     const roll = dice();
-    diceRoll.style.fontWeight = 'bold'; 
-    diceRoll.style.color = 'red'; 
+    diceRoll.style.fontWeight = 'bold';
+    diceRoll.style.color = 'red';
     diceRoll.textContent = `Player ${currentPlayer + 1} rolled a ${roll}`;
     movePlayer(currentPlayer, roll);
     checkLaddersAndSnakes();
-    if (players[currentPlayer].position == boardSize) {
+    if (players[currentPlayer].position === boardSize) {
         status.textContent = `Player ${currentPlayer + 1} wins!`;
         rollBtn.disabled = true;
     } else {
@@ -65,8 +70,25 @@ function updatePlayerPosition(playerIndex) {
     const cells = document.getElementsByClassName('cell');
     const cell = cells[cells.length - position];
     const player = players[playerIndex].element;
-    player.style.top = cell.offsetTop + 'px';
-    player.style.left = cell.offsetLeft + 'px';
+    const boardRect = board.getBoundingClientRect();
+    const cellRect = cell.getBoundingClientRect();
+    player.style.top = `${cellRect.top - boardRect.top}px`;
+    player.style.left = `${cellRect.left - boardRect.left}px`;
+}
+
+function updateAllPlayerPositions() {
+    players.forEach((_, index) => {
+        updatePlayerPosition(index);
+    });
+}
+
+function updateAllPlayerSizes() {
+    const cell = document.querySelector('.cell');
+    const cellSize = cell.offsetWidth;
+    players.forEach(player => {
+        player.element.style.width = `${cellSize * 0.5}px`;
+        player.element.style.height = `${cellSize * 0.5}px`;
+    });
 }
 
 function checkLaddersAndSnakes() {
@@ -81,13 +103,11 @@ function checkLaddersAndSnakes() {
 }
 
 function updateStatus() {
-    status.style.color = 'red'; 
-    status.style.fontWeight= 'bold'; 
+    status.style.color = 'red';
+    status.style.fontWeight = 'bold';
     status.textContent = `Player ${currentPlayer + 1}'s turn`;
 }
 
-
-function dice() 
-{
+function dice() {
     return Math.floor(Math.random() * 6) + 1;
 }
